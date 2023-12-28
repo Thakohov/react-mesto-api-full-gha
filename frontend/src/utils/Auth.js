@@ -1,5 +1,4 @@
-// export const BASE_URL = "https://api.eldar.student.nomoredomainsmonster.ru";
-export const BASE_URL = "https://eldar.student.nomoredomainsmonster.ru";
+export const BASE_URL = "https://api.eldar.student.nomoredomainsmonster.ru";
 
 const getJson = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
