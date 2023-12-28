@@ -65,8 +65,8 @@ class Api {
 }
 
 const optionsApi = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-75",
-  // url: "https://eldar.student.nomoredomainsmonster.ru",
+  // url: "https://mesto.nomoreparties.co/v1/cohort-75",
+  url: "https://eldar.student.nomoredomainsmonster.ru",
   headers: {
     authorization: "a2e53856-d081-4f31-b654-cd6028925996",
     "Content-Type": "application/json",
