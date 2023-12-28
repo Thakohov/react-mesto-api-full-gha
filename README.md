@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP 158.160.137.135
 
-Frontend https://...
+Frontend https://eldar.student.nomoredomainsmonster.ru
 
-Backend https://...
+Backend https://api.eldar.student.nomoredomainsmonster.ru
