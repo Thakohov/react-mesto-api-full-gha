@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const handleError = require('./middlewares/HandleError');
 const router = require('./routes');
 const { PORT } = require('./config');
@@ -10,7 +11,7 @@ const checkCors = require('./middlewares/corsAllowed');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-
+app.use(cors);
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
 app.use(express.json());

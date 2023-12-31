@@ -51,8 +51,8 @@ const App = () => {
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([Api.getInitialCards(), Api.getUserInfo()])
-        .then(([items, user]) => {
-          setCards(items);
+        .then(([cards, user]) => {
+          setCards(cards.data);
           setCurrentUser(user);
         })
         .catch((error) => {
@@ -71,13 +71,12 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
-        .checkToken(jwt)
-        .then((data) => {
-          if (data) {
+        .getContent(jwt)
+        .then((res) => {
+            Api.setToken(jwt)
             setLoggedIn(true);
-            setEmail(data.data.email);
-            navigate("/main", { replace: true });
-          }
+            setEmail(res.data.email);
+            navigate("/", { replace: true });
         })
         .catch((err) => {
           console.log(err);
@@ -115,10 +114,11 @@ const App = () => {
     auth
       .authorize(email, password)
       .then((res) => {
+        Api.setToken(res.token);
         localStorage.setItem("jwt", res.token);
         setEmail(email);
         setLoggedIn(true);
-        navigate("/main", { replace: true });
+        navigate("/", { replace: true });
       })
       .catch(() => {
         setInfoToolTipImage(reject);
@@ -190,6 +190,7 @@ const App = () => {
   const handleUpdateUser = (userInfo) => {
     Api.setUserInfo(userInfo)
       .then((data) => {
+        console.log(data);
         setCurrentUser(data);
         closeAllPopups();
       })

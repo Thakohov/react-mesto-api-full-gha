@@ -2,7 +2,6 @@ import React from "react";
 import vector from "../images/Vector.svg";
 import editButton from "../images/edit-button.svg";
 import plusIcon from "../images/plus.svg";
-import Api from "../utils/Api.js";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 

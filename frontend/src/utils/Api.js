@@ -11,11 +11,15 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  setToken(token) {
+    this._headers.Authorization = `Bearer ${token}`;
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => this._checkResponse(res));
+    }).then((res) => this._checkResponse(res))
   }
 
   createCard(cardData) {
@@ -68,6 +72,7 @@ const optionsApi = {
   url: "https://api.eldar.student.nomoredomainsmonster.ru",
   headers: {
     "Content-Type": "application/json",
+    Authorization: '',
   },
 };
 
