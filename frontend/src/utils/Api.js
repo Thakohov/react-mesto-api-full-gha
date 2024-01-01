@@ -11,6 +11,10 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  setToken(token) {
+    this._headers.Authorization = `Bearer ${token}`;
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
@@ -65,10 +69,10 @@ class Api {
 }
 
 const optionsApi = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-75",
+  url: "https://api.eldar.student.nomoredomainsmonster.ru",
   headers: {
-    authorization: "a2e53856-d081-4f31-b654-cd6028925996",
     "Content-Type": "application/json",
+    authorization: "",
   },
 };
 

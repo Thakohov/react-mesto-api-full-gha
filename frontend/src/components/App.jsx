@@ -72,9 +72,10 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
-        .checkToken(jwt)
+        .getContent(jwt)
         .then((data) => {
           if (data) {
+            Api.setToken(jwt);
             setLoggedIn(true);
             setEmail(data.data.email);
             navigate("/main", { replace: true });

@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP 158.160.137.135
+IP 158.160.129.161
 
 Frontend https://eldar.student.nomoredomainsmonster.ru
 
