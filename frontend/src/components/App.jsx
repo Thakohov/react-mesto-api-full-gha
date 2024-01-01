@@ -118,6 +118,8 @@ const App = () => {
       .authorize(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
+        console.log(res);
+        Api.setToken(res.token)
         setEmail(email);
         setLoggedIn(true);
         navigate("/", { replace: true });
