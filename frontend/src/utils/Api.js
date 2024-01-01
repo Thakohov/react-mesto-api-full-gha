@@ -19,7 +19,7 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => this._checkResponse(res));
+    }).then(this._checkResponse);
   }
 
   createCard(cardData) {
@@ -72,7 +72,7 @@ const optionsApi = {
   url: "https://api.eldar.student.nomoredomainsmonster.ru",
   headers: {
     "Content-Type": "application/json",
-    authorization: "",
+    Authorization: "",
   },
 };
 
