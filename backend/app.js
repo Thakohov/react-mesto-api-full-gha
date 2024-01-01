@@ -5,9 +5,10 @@ const helmet = require('helmet');
 const cors = require('cors');
 const { errors } = require('celebrate');
 const handleError = require('./middlewares/HandleError');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const checkCors = require('./middlewares/allowedCors');
 const router = require('./routes');
 const { PORT, DB_URL } = require('./config');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.use(helmet());
 
 app.use(requestLogger);
 
+app.use(checkCors);
 app.use(router);
 
 app.get('/crash-test', () => {
