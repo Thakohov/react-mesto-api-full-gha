@@ -52,7 +52,7 @@ const App = () => {
     if (loggedIn) {
       Promise.all([Api.getUserInfo(), Api.getInitialCards()])
         .then(([user, cards]) => {
-          setCurrentUser(user);
+          setCurrentUser(user.data);
           setCards(cards);
         })
         .catch((error) => {
@@ -141,12 +141,12 @@ const App = () => {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((like) => like === currentUser._id);
 
     Api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
       .catch((err) => {
@@ -191,7 +191,7 @@ const App = () => {
   const handleUpdateUser = (userInfo) => {
     Api.setUserInfo(userInfo)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -202,7 +202,7 @@ const App = () => {
   const handleUpdateAvatar = (avatarInfo) => {
     Api.setAvatar(avatarInfo)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data.data);
         closeAllPopups();
       })
       .catch((err) => {
