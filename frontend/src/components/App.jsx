@@ -52,8 +52,8 @@ const App = () => {
     if (loggedIn) {
       Promise.all([Api.getUserInfo(), Api.getInitialCards()])
         .then(([user, cards]) => {
-          setCurrentUser(user.data);
-          setCards(cards.data);
+          setCurrentUser(user);
+          setCards(cards);
         })
         .catch((error) => {
           console.log(error);
