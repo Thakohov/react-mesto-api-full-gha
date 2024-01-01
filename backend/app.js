@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 const { errors } = require('celebrate');
-// const { logger } = require('express-winston');
+const { logger } = require('express-winston');
 const handleError = require('./middlewares/HandleError');
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
 const checkCors = require('./middlewares/allowedCors');
@@ -20,7 +20,7 @@ mongoose.connect(DB_URL);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-// app.use(logger);
+app.use(logger);
 
 app.use(checkCors);
 // app.use(requestLogger);
