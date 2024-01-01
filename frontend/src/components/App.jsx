@@ -51,9 +51,9 @@ const App = () => {
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([Api.getInitialCards(), Api.getUserInfo()])
-        .then(([items, user]) => {
-          console.log(items);
-          setCards(items);
+        .then(([cards, user]) => {
+          console.log(cards);
+          setCards(cards);
           setCurrentUser(user);
         })
         .catch((error) => {
@@ -74,12 +74,10 @@ const App = () => {
       auth
         .getContent(jwt)
         .then((data) => {
-          if (data) {
             Api.setToken(jwt);
             setLoggedIn(true);
             setEmail(data.data.email);
             navigate("/main", { replace: true });
-          }
         })
         .catch((err) => {
           console.log(err);

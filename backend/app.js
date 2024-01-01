@@ -12,14 +12,13 @@ const { PORT, DB_URL } = require('./config');
 
 const app = express();
 app.use(cors());
+app.use(requestLogger);
 
 mongoose.connect(DB_URL);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-
-app.use(requestLogger);
 
 app.use(checkCors);
 app.use(router);
