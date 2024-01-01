@@ -3,7 +3,6 @@ const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
   'https://eldar.student.nomoredomainsmonster.ru',
-  'https://api.eldar.student.nomoredomainsmonster.ru',
   'localhost:3000',
 ];
 
@@ -19,10 +18,9 @@ function checkCors(req, res, next) {
   const { method } = req;
 
   if (method === 'OPTIONS') {
-    res.set({
-      'Access-Control-Allow-Methods': DEFAULT_ALLOWED_METHODS,
-      'Access-Control-Allow-Headers': requestHeaders,
-    });
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    res.end();
   }
 
   next();
