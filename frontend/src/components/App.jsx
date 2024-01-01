@@ -51,8 +51,9 @@ const App = () => {
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([Api.getInitialCards(), Api.getUserInfo()])
-        .then(([cards, user]) => {
-          setCards(cards.data);
+        .then(([items, user]) => {
+          console.log(items);
+          setCards(items);
           setCurrentUser(user);
         })
         .catch((error) => {
@@ -71,12 +72,13 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
-        .getContent(jwt)
-        .then((res) => {
-            Api.setToken(jwt)
+        .checkToken(jwt)
+        .then((data) => {
+          if (data) {
             setLoggedIn(true);
-            setEmail(res.data.email);
-            navigate("/", { replace: true });
+            setEmail(data.data.email);
+            navigate("/main", { replace: true });
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -114,7 +116,6 @@ const App = () => {
     auth
       .authorize(email, password)
       .then((res) => {
-        Api.setToken(res.token);
         localStorage.setItem("jwt", res.token);
         setEmail(email);
         setLoggedIn(true);
@@ -190,7 +191,6 @@ const App = () => {
   const handleUpdateUser = (userInfo) => {
     Api.setUserInfo(userInfo)
       .then((data) => {
-        console.log(data);
         setCurrentUser(data);
         closeAllPopups();
       })

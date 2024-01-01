@@ -6,9 +6,7 @@ const NoPermission = require('../errors/NoPermission');
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => {
-      res.send(cards);
-    })
+    .then((cards) => res.send({ data: cards }))
     .catch(next);
 };
 
@@ -17,7 +15,6 @@ const createCard = (req, res, next) => {
 
   Card.create({ name, link, owner })
     .then((card) => res.status(201).send({ data: card }))
-    .then((card) => res.status(201).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest('Переданы некорректные данные при создании карточки'));
