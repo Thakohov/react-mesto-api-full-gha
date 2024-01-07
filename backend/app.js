@@ -24,12 +24,6 @@ app.use(checkCors);
 app.use(requestLogger);
 app.use(router);
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 app.use(errorLogger);
 app.use(errors());
 app.use(handleError);
